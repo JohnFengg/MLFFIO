@@ -92,39 +92,6 @@ class compostion():
 
 
 if __name__=='__main__':
-    # files=[i for i in os.listdir() if 'ZrO2' in i]
-    # atoms=[read(file,format='vasp') for file in files]
-    # # print(get_crystal_system(atoms,tol=1e-5))
-    # print(lattice.get_space_group(atoms))
-    # print(lattice.lattice_judge(atoms))
-    # for i in [3,6,9,12]:
-    #     atoms=read(f'../{i}/all.arc@0')
-    #     print(i,atoms.get_chemical_formula())
-    # doped_dict={
-    #             '3':{'Y':2,'vo':1},
-    #             '6':{'Y':4,'vo':2},
-    #             '9':{'Y':6,'vo':3},
-    #             '12':{'Y':8,'vo':4},
-    #             }
-    
-    # atoms=read('ZrO2.ortho-pnma.poscar')
-    # try:
-    #     os.mkdir('ortho-pnma')
-    # except:
-    #     pass
-    # for k,v in doped_dict.items():
-    #     cp=compostion(atoms)
-    #     atoms_new=cp.oxide_doping('Zr','Y',v['Y'],v['vo'],(2,2,2))
-    #     atoms2arc([atoms_new],'ortho-pnma/struc%s.arc'%k,has_energy=False)
-    #     print(atoms_new.get_chemical_formula())
-    #     # write('tetra/POSCAR.tetra.%s'%k,atoms_new)
-
-    # for i in [3,6,9,12]:
-    #     atoms=read('../%s/best.traj@-1'%i)
-    #     print(atoms.get_chemical_formula())
-    #     atoms2arc([atoms],'tril/struc%s.arc'%i,has_energy=False)
-    from ase.visualize import view
-    # atoms=read('test.traj')
     atoms=arc2atoms('struc.arc')[0]
     slab=lattice.slab_gen(atoms,(1,1,1),2)
     view(slab)
