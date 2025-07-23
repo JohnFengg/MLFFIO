@@ -179,29 +179,8 @@ class calculation():
 
 
 if __name__ == '__main__':
-    # atoms=calculation.random('all.arc',50)+calculation.random('md.arc',50)
-    # print(f'Final images for validation calc is {len(atoms)}')
-    # calc=calculation(atoms)
-    # atoms_fp=calc.vasp_auto_calc(work_dir='tmp_fp')
-    # write('fp.traj',atoms_fp)
-    # atoms_nn=calc.lasp_calc(work_dir='tmp_nn',potname='YSZ.pot')
-    # write('nn.traj',atoms_nn)
-
-    # results={}
-    # for i in ['3','6','9','12']:
-    #     atoms_fp=read(os.path.join(i,'fp.traj'),'50:')
-    #     atoms_nn=read(os.path.join(i,'nn.traj'),'50:')
-    #     print(len(atoms_fp),len(atoms_nn))
-    #     dp=data_process(atoms_fp,atoms_nn)
-    #     err_en,err_for=dp.mse_calc()
-    #     results[i]={'energy: eV':{'mse':err_en[0],'rmse':err_en[1],'mae':err_en[2]},
-    #              'force: eV/A':{'mse':err_for[0],'rmse':err_for[1],'mae':err_for[2]}}
-    #     dp.results_plot('DFT','NN',f'{i}_md_err.png')
-    # with open('md_err.json', 'w') as f:
-    #     json.dump(results,f,indent=2)
-
-    atoms_fp=read(os.path.join('3','fp.traj'),':')+read(os.path.join('6','fp.traj'),':')+read(os.path.join('9','fp.traj'),':')+read(os.path.join('12','fp.traj'),':')
-    atoms_nn=read(os.path.join('3','nn.traj'),':')+read(os.path.join('6','nn.traj'),':')+read(os.path.join('9','nn.traj'),':')+read(os.path.join('12','nn.traj'),':')
+    atoms_fp=read(your_filename)
+    atoms_nn=read(your_filename)
     print(len(atoms_fp),len(atoms_nn))
     dp=data_process(atoms_fp,atoms_nn)
     err_en,err_for=dp.mse_calc()
