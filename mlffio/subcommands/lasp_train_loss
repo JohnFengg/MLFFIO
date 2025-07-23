@@ -1,0 +1,7 @@
+#!/bin/bash
+grep -E 'C =|Ce' lasp.out | awk '
+/C =/ {c=$5}
+/Ce/  {printf "%.3f %.3f %.3f %.3f\n", c, $2, $4, $6}
+'  > loss.txt
+
+grep "RMS/MAE/" lasp.out | awk '{print $3,$7,$11}' > rmse.txt

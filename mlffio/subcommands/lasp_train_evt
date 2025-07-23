@@ -1,0 +1,30 @@
+#!/bin/bash
+readarray -t times < <(grep "delt_time_Epoch" lasp.out | awk '{print $2}')
+n_done=${#times[@]}
+# echo ${times[@]}
+# total_time=0
+# for t in "${times[@]}"
+# do 
+# total_time=$(echo "$total_time+$t" | bc)
+# # echo $total_time
+# done 
+first_time=${times[0]}
+middle_index=$((n_done / 2))
+middle_time=${times[$middle_index]}
+last_time=${times[$((n_done - 1))]}
+
+avg_time=$(echo "($first_time + $middle_time + $last_time) / 3" | bc -l)
+total_time=$(echo "$avg_time * $n_done" | bc -l)
+
+n_total=$(grep NNepochs lasp.in | awk '{print $2}')
+future_total_time=$(echo "$avg_time*$n_total" | bc -l)
+
+remain_steps=$(echo "$n_total-$n_done" | bc)
+future_ramain_time=$(echo "$avg_time*$remain_steps"| bc -l)
+
+echo "current at step $n_done of $n_total"
+echo -n "per_step|used|total|remaining times are: "
+printf "%.2fs|" $avg_time
+printf "%.2fh|" $(echo "$total_time / 3600" | bc -l)
+printf "%.2fh|" $(echo "$future_total_time / 3600" | bc -l)
+printf "%.2fh\n" $(echo "$future_ramain_time / 3600" | bc -l)
