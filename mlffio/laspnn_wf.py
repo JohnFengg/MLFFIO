@@ -262,52 +262,31 @@ class train():
         os.chdir(root_dir)
 
 if __name__=="__main__":
-    samp=sampling(work_dir='1-ssw')
-    config_path=[
-        "../source/init_struc/3mol/0",
-        "../source/init_struc/3mol/1",
-        "../source/init_struc/3mol/2",
-        "../source/init_struc/3mol/3",
-        "../source/init_struc/3mol/4",
-        "../source/init_struc/6mol/0",
-        "../source/init_struc/6mol/1",
-        "../source/init_struc/6mol/2",
-        "../source/init_struc/6mol/3",
-        "../source/init_struc/6mol/4",
-        "../source/init_struc/9mol/0",
-        "../source/init_struc/9mol/1",
-        "../source/init_struc/9mol/2",
-        "../source/init_struc/9mol/3",
-        "../source/init_struc/9mol/4",
-        "../source/init_struc/12.5mol/0",
-        "../source/init_struc/12.5mol/1",
-        "../source/init_struc/12.5mol/2",
-        "../source/init_struc/12.5mol/3",
-        "../source/init_struc/12.5mol/4"
-    ]
+    samp=sampling(work_dir='your_path')
+    config_path=[‘your_path’]
     samp.config_init(config_path=config_path)
-    samp.write_input(pot_file='../c003/3-train/run1/train/YSZ.pot',
-                     pot_name='YSZ.pot',
-                     input_file='./lasp-ssw.in',
-                     slurm_file='./lasp-ssw.slurm')
+    samp.write_input(pot_file='your_path',
+                     pot_name='your_filename',
+                     input_file='your_filename',
+                     slurm_file='your_filename')
     samp.run()
 
-    label=labelling(work_dir='2-dft-recalc')
+    label=labelling(work_dir='your_path')
     label.traj_extract(ratio=1,
-                           samp_path='./1-ssw/',
-                           filename='Badstr.arc',
+                           samp_path='your_path',
+                           filename='your_filename',
                            continued=0)
-    label.write_input(input_file='fp.py',
-                          slurm_file='fp.slurm')
+    label.write_input(input_file='your_filename',
+                          slurm_file='your_filename')
     label.run()
     label.check()
     label.results_pkg()
 
     trn=train('3-train/run1')
-    trn.write_input(traj_file=['../c002/2-dft-recalc/dft.traj','../c001/2-dft-recalc/all.traj'],
-                      loss_set='adjust_factor',
+    trn.write_input(traj_file=['your_filename1','your_filename2','your_filename...'],
+                      loss_set='your_filename',
                     #   pot_file='3-train/run1/train/SavePot/pot_in_step-500',
                     #   pot_name='YSZ.input',
-                      input_file='lasp-train.in',
-                      slurm_file='sub-train.slurm')
+                      input_file='your_filename',
+                      slurm_file='your_filename')
     trn.run()
