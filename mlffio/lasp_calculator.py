@@ -102,12 +102,12 @@ if __name__=="__main__":
     # lasp_calc=lasp_calculator(
     #                           atoms=atoms,
     #                           command='mpirun -np 8 lasp',
-    #                           work_dir='test_calculator',
+    #                           work_dir='your_path',
     #                           mode='nn',
-    #                           potential='YSZ.pot'
+    #                           potential='your_filename'
     #                         )
     # atoms_nn=lasp_calc.calculte()
-    # traj=Trajectory('test.traj','w')
+    # traj=Trajectory('your_filename','w')
     # traj.write(atoms_nn[0])
     
     atoms=[arc2atoms(file)[0] for file in os.listdir() if 'arc' in file]
@@ -115,9 +115,9 @@ if __name__=="__main__":
     lasp_calc=lasp_calculator(
                               atoms=atoms,
                               command='mpirun -np 28 lasp',
-                              work_dir='ssw-opt',
+                              work_dir='your_path',
                               mode='ssw-fixed',
-                              potential='YSZ.pot'
+                              potential='your_filename'
                             )
     atoms_nn=lasp_calc.calculate(struc_file='best.arc')
     write('opt.traj',atoms_nn)
